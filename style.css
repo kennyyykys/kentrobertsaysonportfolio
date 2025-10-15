@@ -11,12 +11,23 @@
     }
 
     body {
-      background: #0f172a;
+      background: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2daddf3c-add4-4a2b-880d-064be6821c92/dglksej-3ed5f398-b5c8-4d98-b908-43438b2964f2.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi8yZGFkZGYzYy1hZGQ0LTRhMmItODgwZC0wNjRiZTY4MjFjOTIvZGdsa3Nlai0zZWQ1ZjM5OC1iNWM4LTRkOTgtYjkwOC00MzQzOGIyOTY0ZjIuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.pvXSZPop1ieFDQmfka3pjU9t0W2wxdAmqymDsMCACHc") no-repeat center center fixed;
+      background-size: cover;
       color: #f8fafc;
       line-height: 1.6;
-      transition:  0.5s, color 0.5s;
-    }
+      transition: 0.5s, color 0.5s;
+  }
 
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.7); /* dark, semi-transparent */
+    z-index: -1;
+  }
     header {
       background: #1e293b;
       text-align: center;
@@ -25,6 +36,8 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(5px);
     }
 
     header h1 {
@@ -75,6 +88,8 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       transition:  0.5s, color 0.5s;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(5px);
     }
 
     h2 {
@@ -203,60 +218,7 @@
       color: #0f172a;
     }
 
-    /* LIGHT MODE */
-    .light-mode {
-      background: #f8fafc;
-      color: #0f172a;
-    }
 
-    .light-mode header {
-      background: #e2e8f0;
-    }
-
-    .light-mode nav a {
-      color: #0f172a;
-    }
-
-    .light-mode section {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    .light-mode .tech {
-      background: #cbd5e1;
-      color: #0f172a;
-    }
-
-    .light-mode .tech:hover {
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    .light-mode #theme-toggle {
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    .light-mode .contact-form input,
-    .light-mode .contact-form textarea {
-      background: #cbd5e1;
-      color: #0f172a;
-    }
-
-    .light-mode .contact-form button {
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    .light-mode .social-links a {
-      background: #cbd5e1;
-      color: #0f172a;
-    }
-
-    .light-mode .social-links a:hover {
-      background: #0ea5e9;
-      color: #f8fafc;
-    }
     .about-container {
   display: flex;
   flex-direction: column;
