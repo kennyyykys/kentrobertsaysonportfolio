@@ -36,12 +36,4 @@
   <circle cx="260" cy="280" r="2" fill="#bae6fd"/>
   <circle cx="460" cy="150" r="2" fill="#bae6fd"/>
   <circle cx="315" cy="105" r="2" fill="#bae6fd"/>
-
-  <!-- title text -->
-  <text x="60" y="110" fill="#e5e7eb" font-family="'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="600">
-    Color Changing Box
-  </text>
-  <text x="60" y="144" fill="#cbd5f5" font-family="'Poppins', system-ui" font-size="16">
-    Interactive glow • Random colors • Smooth animation
-  </text>
 </svg>
