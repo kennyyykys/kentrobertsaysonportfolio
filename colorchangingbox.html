@@ -18,37 +18,59 @@
       background: url("bg.gif") no-repeat center center fixed;
       background-size: cover;
       backdrop-filter: blur(5px);
-
+      text-align: center;
     }
 
-    
     h1 {
       margin-bottom: 20px;
     }
 
     #colorBox {
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       background-color: #3498db;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #3498db;
-      transition: background-color 0.6s ease-out, box-shadow 0.6s ease-out;
-      margin-bottom: 20px;
+      border-radius: 18px;
+      box-shadow: 0 0 30px #3498db;
+      transition: background-color 0.6s ease-out, box-shadow 0.6s ease-out, transform 0.3s ease-out;
+      margin-bottom: 24px;
+    }
+
+    #colorBox:hover {
+      transform: translateY(-4px);
     }
 
     button {
-      background-color: #555;
-      color: white;
+      background-color: #38bdf8;
+      color: #0f172a;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 10px 24px;
+      border-radius: 999px;
       cursor: pointer;
       font-size: 16px;
-      transition: background-color 0.3s ease;
+      font-weight: 500;
+      transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.7);
     }
 
     button:hover {
-      background-color: #777;
+      background-color: #0ea5e9;
+    }
+
+    button:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+
+    .back-link {
+      margin-top: 18px;
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -56,6 +78,8 @@
   <h1>Color Changing Box</h1>
   <div id="colorBox"></div>
   <button onclick="changeColor()">Change Color</button>
+
+  <a href="index.html" class="back-link">← Back to portfolio</a>
 
 <script src="script.js"></script>
 

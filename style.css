@@ -162,7 +162,7 @@ h2 {
 .view-btn:hover {
   background: #1d6fa5;
   transform: translateY(-2px); /* subtle lift effect */
-}
+}                                                     
 .contact-form {
   display: flex;
   flex-direction: column;

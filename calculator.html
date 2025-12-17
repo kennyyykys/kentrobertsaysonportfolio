@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="calcuS.css">
+</head>
+<body>
+        <div class="calculator" aria-label="Basic calculator">
+            <div class="calculator__expression" aria-hidden="true"></div>
+            <div class="calculator__display" aria-live="polite">0</div>
+            <div class="calculator__keys">
+            <button class="key--operator" data-action="add">+</button>
+            <button class="key--operator" data-action="subtract">-</button>
+            <button class="key--operator" data-action="multiply">&times;</button>
+            <button class="key--operator" data-action="divide">÷</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button data-action="decimal">.</button>
+                        <button data-action="clear">AC</button>
+                        <button class="key--equal" data-action="calculate">=</button>
+        </div>
+    </div>
+
+        <script>
+            const calculator = document.querySelector('.calculator');
+            const display = calculator.querySelector('.calculator__display');
+            const expressionDisplay = calculator.querySelector('.calculator__expression');
+            const keys = calculator.querySelector('.calculator__keys');
+
+            keys.addEventListener('click', (e) => {
+                if (!e.target.matches('button')) return;
+
+                const key = e.target;
+                const action = key.dataset.action;
+                const keyContent = key.textContent;
+                const displayedNum = display.textContent;
+                const previousKeyType = calculator.dataset.previousKeyType;
+
+                Array.from(keys.children).forEach(k => k.classList.remove('is-depressed'));
+
+                                const operatorSymbols = {
+                                    add: '+',
+                                    subtract: '-',
+                                    multiply: '×',
+                                    divide: '÷'
+                                };
+
+                                if (!action) {
+                                    let nextDisplay;
+
+                                    if (displayedNum === '0' || previousKeyType === 'operator' || previousKeyType === 'calculate') {
+                                        nextDisplay = keyContent;
+                                    } else {
+                                        nextDisplay = displayedNum + keyContent;
+                                    }
+
+                                    display.textContent = nextDisplay;
+                                    calculator.dataset.previousKeyType = 'number';
+
+                                    const firstValueForExpr = calculator.dataset.firstValue;
+                                    const operatorForExpr = calculator.dataset.operator;
+                                    const symbolForExpr = operatorSymbols[operatorForExpr];
+
+                                    if (previousKeyType === 'calculate') {
+                                        // Starting a brand new calculation after '=', clear old expression.
+                                        expressionDisplay.textContent = '';
+                                    } else if (firstValueForExpr && symbolForExpr) {
+                                        // Update expression in real time while typing the second operand.
+                                        expressionDisplay.textContent = `${firstValueForExpr} ${symbolForExpr} ${nextDisplay}`;
+                                    }
+                                }
+
+                if (action === 'decimal') {
+                    if (!displayedNum.includes('.')) {
+                        display.textContent = displayedNum + '.';
+                    } else if (previousKeyType === 'operator' || previousKeyType === 'calculate') {
+                        display.textContent = '0.';
+                    }
+                    calculator.dataset.previousKeyType = 'decimal';
+                }
+
+                if (action === 'add' || action === 'subtract' || action === 'multiply' || action === 'divide') {
+                    const firstValue = calculator.dataset.firstValue;
+                    const operator = calculator.dataset.operator;
+                    const secondValue = displayedNum;
+
+                    if (firstValue && operator && previousKeyType !== 'operator' && previousKeyType !== 'calculate') {
+                        const calcValue = calculate(firstValue, operator, secondValue);
+                        display.textContent = calcValue;
+                        calculator.dataset.firstValue = calcValue;
+                        expressionDisplay.textContent = `${calcValue} ${operatorSymbols[action]}`;
+                    } else {
+                        calculator.dataset.firstValue = displayedNum;
+                        expressionDisplay.textContent = `${displayedNum} ${operatorSymbols[action]}`;
+                    }
+
+                    key.classList.add('is-depressed');
+                    calculator.dataset.previousKeyType = 'operator';
+                    calculator.dataset.operator = action;
+                }
+
+                if (action === 'clear') {
+                    calculator.dataset.firstValue = '';
+                    calculator.dataset.operator = '';
+                    calculator.dataset.previousKeyType = '';
+                    display.textContent = '0';
+                    expressionDisplay.textContent = '';
+                }
+
+                if (action === 'calculate') {
+                    let firstValue = calculator.dataset.firstValue;
+                    const operator = calculator.dataset.operator;
+                    let secondValue = displayedNum;
+
+                    if (firstValue) {
+                        if (previousKeyType === 'calculate') {
+                            firstValue = displayedNum;
+                            secondValue = calculator.dataset.modValue;
+                        }
+
+                        const result = calculate(firstValue, operator, secondValue);
+                        display.textContent = result;
+                        const symbol = operatorSymbols[operator] || '';
+                        expressionDisplay.textContent = `${firstValue} ${symbol} ${secondValue} =`;
+                    }
+
+                    calculator.dataset.modValue = secondValue;
+                    calculator.dataset.previousKeyType = 'calculate';
+                }
+            });
+
+            function calculate(n1, operator, n2) {
+                const firstNum = parseFloat(n1);
+                const secondNum = parseFloat(n2);
+
+                if (operator === 'add') return firstNum + secondNum;
+                if (operator === 'subtract') return firstNum - secondNum;
+                if (operator === 'multiply') return firstNum * secondNum;
+                if (operator === 'divide') return secondNum === 0 ? 'Error' : firstNum / secondNum;
+                return secondNum;
+            }
+        </script>
+
+ </body>
+ </html>
